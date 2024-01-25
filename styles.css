@@ -60,16 +60,24 @@ h1 {
     backface-visibility: hidden;
 }
 
-.card-container .card-after .image {
-    max-width: 70%;
-    max-height: 70%;
-}
-
 .card-before {
     background-color: #9BB69B;
 }
 .card-after {
     background-color: #9BB69B;
+    transform: rotateY(180deg);
+}
+
+.card-container.flipped .card-before {
+    transform: rotateY(180deg);
+}
+.card-container.flipped .card-after {
+    transform: rotateY(0deg);
+}
+
+.card-container .card-after .image {
+    max-width: 70%;
+    max-height: 70%;
 }
 
 .button-control,
@@ -92,4 +100,3 @@ button {
     border-radius: 15px;
     width: 140px
 }
-  
