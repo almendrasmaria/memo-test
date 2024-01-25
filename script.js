@@ -57,9 +57,16 @@ for (let i = 0; i < size; i++) {
     
     gameContainer.style.gridTemplateColumns = `repeat(${size}, auto)`;
     cards = document.querySelectorAll(".card-container");
+    cards.forEach(card => card.addEventListener("click", flipCard));
+};
+
+// Esta funcion maneja el comportamiento del clic en una tarjeta
+const flipCard = (event) => {
+    const selectedCard = event.target.closest(".card-container");
+    if (!selectedCard.classList.contains("flipped")) {
+        selectedCard.classList.add("flipped");
+    }
 };
 
 const initialCardValues = generateRandom();
 matrixGenerator(initialCardValues);
-
-
