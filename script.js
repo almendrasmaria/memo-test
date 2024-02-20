@@ -1,10 +1,13 @@
 const moves = document.getElementById("moves-count"); 
 const timeValue = document.getElementById("time"); 
-const buttonControl = document.getElementById("button-control");  
+const buttonControl = document.querySelector(".button-control"); 
 const controls = document.querySelector(".game-stats"); 
 const gameContainer = document.querySelector(".game-board");
 let firstCard = false; 
 let secondCard = false; 
+let movesCount = 0;
+let buttonClicked = false;
+
 
 // Array de las imagenes 
 const items = [
@@ -67,12 +70,24 @@ const matrixGenerator = (cardValues, size = 4) => {
   cards.forEach(card => card.addEventListener("click", flipCard));
 };
 
+// Evento de clic en el botón de inicio
+buttonControl.addEventListener("click", () => {
+  // Reiniciar contador de movimientos solo cuando se hace clic en el botón
+  if (buttonClicked) {
+    movesCount = 0;
+    moves.textContent = `Movimientos: ${movesCount}`;
+  }
+
+  // Cambiar el estado del juego
+  buttonClicked = !buttonClicked;
+});
+
 // Función para voltear una carta
 const flipCard = (event) => {
   const selectedCard = event.target.closest(".card-container");
 
-  // Se verifica si la carta no está emparejada
-  if (!selectedCard.classList.contains("matched")) {
+  // Se verifica si la carta no está emparejada y el juego está en curso
+  if (!selectedCard.classList.contains("matched") && buttonClicked) {
     selectedCard.classList.add("flipped");
 
     if (!firstCard) {
@@ -100,10 +115,16 @@ const flipCard = (event) => {
           secondCard = null;
         }, 900);
       }
+
+      // Incrementar el contador de movimientos solo si el juego está en curso
+      movesCount++;
+      moves.textContent = `Movimientos: ${movesCount}`;
     }
   }
 };
 
+
 // Inicializar el juego
 const initialCardValues = generateRandom();
 matrixGenerator(initialCardValues);
+
