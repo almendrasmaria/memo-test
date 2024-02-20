@@ -2,6 +2,10 @@
     font-family: MoreSugar;
     src: url('./fonts/MoreSugar-Regular.otf');
 }
+@font-face {
+    font-family: Baloo;
+    src: url('./fonts/Baloo-Regular.ttf');
+}
 
 * {
     padding: 0;
@@ -31,8 +35,22 @@ h1 {
     text-align: center; 
     font-family: MoreSugar;
     font-size: 45px;
-    padding: 0px 0px 20px 0px;
 }
+
+.game-stats {
+    color: #073B36;
+    font-family: Baloo;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#moves-count,
+#time {
+  margin: 0;
+  padding: 10px; 
+}
+
 .game-board {
     position: relative;
     width: 100%;
@@ -85,6 +103,7 @@ button {
     display: flex;
     align-items: center;
     justify-content: center;
+    cursor: pointer;
 }
 
 .button-control {
@@ -98,5 +117,5 @@ button {
     color: white;
     border: none;
     border-radius: 15px;
-    width: 140px
+    width: 140px;
 }
