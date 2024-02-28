@@ -1,17 +1,26 @@
-const moves = document.getElementById("moves-count"); 
-const timeValue = document.getElementById("time"); 
-const buttonControl = document.querySelector(".button-control"); 
-const controls = document.querySelector(".game-stats"); 
+const moves = document.getElementById("moves-count");
+const timeValue = document.getElementById("time");
+const buttonControl = document.querySelector(".button-control");
+const controls = document.querySelector(".game-stats");
 const gameContainer = document.querySelector(".game-board");
-let firstCard = false; 
-let secondCard = false; 
+let firstCard = false;
+let secondCard = false;
 let movesCount = 0;
 let buttonClicked = false;
+let timeCounter; // Variable para el contador de tiempo
+let elapsedTime = 0; // Tiempo transcurrido en segundos
 
+// Función para actualizar el contador de tiempo
+function updateTime() {
+  elapsedTime++;
+  const minutes = Math.floor(elapsedTime / 60);
+  const seconds = elapsedTime % 60;
+  timeValue.textContent = `Tiempo: ${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+}
 
-// Array de las imagenes 
+// Array de las imagenes
 const items = [
-  { name: "candy-cane", image: "candy-cane.png" }, 
+  { name: "candy-cane", image: "candy-cane.png" },
   { name: "christmas-tree", image: "christmas-tree.png" },
   { name: "gingerbread-man", image: "gingerbread-man.png" },
   { name: "snow-globe", image: "snow-globe.png" },
@@ -26,13 +35,13 @@ function generateRandom(size = 4) {
   let tempArray = [...items];
   let cardValues = [];
 
-  size = (size * size) / 2; 
+  size = (size * size) / 2;
 
   for (let i = 0; i < size; i++) {
     const randomIndex = Math.floor(Math.random() * tempArray.length);
     cardValues.push(tempArray[randomIndex]);
 
-    tempArray.splice(randomIndex, 1); 
+    tempArray.splice(randomIndex, 1);
   }
 
   return cardValues;
@@ -75,7 +84,13 @@ buttonControl.addEventListener("click", () => {
   // Reiniciar contador de movimientos solo cuando se hace clic en el botón
   if (buttonClicked) {
     movesCount = 0;
+    elapsedTime = 0; // Reiniciar el tiempo
+    clearInterval(timeCounter); // Detener el contador de tiempo
+    timeValue.textContent = 'Tiempo: 0:00'; // Reiniciar la visualización del tiempo
     moves.textContent = `Movimientos: ${movesCount}`;
+  } else {
+    // Iniciar contador de tiempo
+    timeCounter = setInterval(updateTime, 1000);
   }
 
   // Cambiar el estado del juego
@@ -123,8 +138,6 @@ const flipCard = (event) => {
   }
 };
 
-
 // Inicializar el juego
 const initialCardValues = generateRandom();
 matrixGenerator(initialCardValues);
-
