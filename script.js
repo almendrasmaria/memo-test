@@ -20,14 +20,14 @@ function updateTime() {
 
 // Array de las imagenes
 const items = [
-  { name: "candy-cane", image: "candy-cane.png" },
-  { name: "christmas-tree", image: "christmas-tree.png" },
-  { name: "gingerbread-man", image: "gingerbread-man.png" },
-  { name: "snow-globe", image: "snow-globe.png" },
-  { name: "snowman-head", image: "snowman-head.png" },
-  { name: "snowman", image: "snowman.png" },
-  { name: "winter-hat", image: "winter-hat.png" },
-  { name: "wreath", image: "wreath.png" },
+  { name: "candy-cane", image: "candy-cane.webp" },
+  { name: "christmas-tree", image: "christmas-tree.webp" },
+  { name: "gingerbread-man", image: "gingerbread-man.webp" },
+  { name: "snow-globe", image: "snow-globe.webp" },
+  { name: "snowman-head", image: "snowman-head.webp" },
+  { name: "snowman", image: "snowman.webp" },
+  { name: "winter-hat", image: "winter-hat.webp" },
+  { name: "wreath", image: "wreath.webp" },
 ];
 
 // Función para generar cartas aleatorias
