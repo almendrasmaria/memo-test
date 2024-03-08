@@ -1,3 +1,5 @@
+import { generateRandom } from "./components/card.js";
+
 const moves = document.getElementById("moves-count");
 const timeValue = document.getElementById("time");
 const buttonControl = document.querySelector(".button-control");
@@ -9,42 +11,16 @@ let movesCount = 0;
 let buttonClicked = false;
 let timeCounter; // Variable para el contador de tiempo
 let elapsedTime = 0; // Tiempo transcurrido en segundos
+let firstCardValue;
 
 // Función para actualizar el contador de tiempo
 function updateTime() {
   elapsedTime++;
   const minutes = Math.floor(elapsedTime / 60);
   const seconds = elapsedTime % 60;
-  timeValue.textContent = `Tiempo: ${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
-}
-
-// Array de las imagenes
-const items = [
-  { name: "candy-cane", image: "candy-cane.webp" },
-  { name: "christmas-tree", image: "christmas-tree.webp" },
-  { name: "gingerbread-man", image: "gingerbread-man.webp" },
-  { name: "snow-globe", image: "snow-globe.webp" },
-  { name: "snowman-head", image: "snowman-head.webp" },
-  { name: "snowman", image: "snowman.webp" },
-  { name: "winter-hat", image: "winter-hat.webp" },
-  { name: "wreath", image: "wreath.webp" },
-];
-
-// Función para generar cartas aleatorias
-function generateRandom(size = 4) {
-  let tempArray = [...items];
-  let cardValues = [];
-
-  size = (size * size) / 2;
-
-  for (let i = 0; i < size; i++) {
-    const randomIndex = Math.floor(Math.random() * tempArray.length);
-    cardValues.push(tempArray[randomIndex]);
-
-    tempArray.splice(randomIndex, 1);
-  }
-
-  return cardValues;
+  timeValue.textContent = `Tiempo: ${minutes}:${
+    seconds < 10 ? "0" : ""
+  }${seconds}`;
 }
 
 // Función para mostrar el tablero de juego
@@ -64,7 +40,7 @@ const matrixGenerator = (cardValues, size = 4) => {
           style="grid-column: ${j + 1}; grid-row: ${i + 1};">
           <div class="card-before"></div>
           <div class="card-after">
-            <img src="images/${cardValues[index].image}" class="image"/>
+            <img src="public/${cardValues[index].image}" class="image"/>
           </div>
         </div>
       `;
@@ -76,7 +52,7 @@ const matrixGenerator = (cardValues, size = 4) => {
   const cards = document.querySelectorAll(".card-container");
 
   // Se añade un evento de clic a cada carta para voltearla
-  cards.forEach(card => card.addEventListener("click", flipCard));
+  cards.forEach((card) => card.addEventListener("click", flipCard));
 };
 
 // Evento de clic en el botón de inicio
@@ -86,7 +62,7 @@ buttonControl.addEventListener("click", () => {
     movesCount = 0;
     elapsedTime = 0; // Reiniciar el tiempo
     clearInterval(timeCounter); // Detener el contador de tiempo
-    timeValue.textContent = 'Tiempo: 0:00'; // Reiniciar la visualización del tiempo
+    timeValue.textContent = "Tiempo: 0:00"; // Reiniciar la visualización del tiempo
     moves.textContent = `Movimientos: ${movesCount}`;
   } else {
     // Iniciar contador de tiempo
