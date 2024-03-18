@@ -12,12 +12,12 @@ const items = [
 
 // Function to generate random cards
 export const generateRandom = (size = 4) => {
-  let tempArray = [...items];
-  let cardValues = [];
+  const tempArray = [...items];
+  const cardValues = [];
 
-  size = (size * size) / 2;
+  const totalCards = (size * size) / 2;
 
-  for (let i = 0; i < size; i++) {
+  for (let i = 0; i < totalCards; i++) {
     const randomIndex = Math.floor(Math.random() * tempArray.length);
     cardValues.push(tempArray[randomIndex]);
 

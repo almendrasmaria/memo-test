@@ -1,6 +1,7 @@
-import { generateRandom } from "./components/card.js";
 import updateTime from "./components/timer.js";
-import { buttonControl, controls, gameContainer, moves } from "./elements.js";
+
+import { generateRandom } from "./components/card.js";
+import { buttonControl, gameContainer, moves, timeValue } from "./elements.js";
 
 let firstCard = false;
 let secondCard = false;
@@ -46,7 +47,7 @@ buttonControl.addEventListener("click", () => {
   // Reiniciar contador de movimientos solo cuando se hace clic en el botón
   if (buttonClicked) {
     movesCount = 0;
-    elapsedTime = 0; // Reiniciar el tiempo
+    let elapsedTime = 0; // Reiniciar el tiempo
     clearInterval(buttonCounter); // Detener el contador de tiempo
     timeValue.textContent = "Tiempo: 0:00"; // Reiniciar la visualización del tiempo
     moves.textContent = `Movimientos: ${movesCount}`;
@@ -101,5 +102,4 @@ const flipCard = (event) => {
 };
 
 // Inicializar el juego
-const initialCardValues = generateRandom();
-matrixGenerator(initialCardValues);
+matrixGenerator(generateRandom());
