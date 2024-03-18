@@ -1,27 +1,13 @@
 import { generateRandom } from "./components/card.js";
+import updateTime from "./components/timer.js";
+import { buttonControl, controls, gameContainer, moves } from "./elements.js";
 
-const moves = document.getElementById("moves-count");
-const timeValue = document.getElementById("time");
-const buttonControl = document.querySelector(".button-control");
-const controls = document.querySelector(".game-stats");
-const gameContainer = document.querySelector(".game-board");
 let firstCard = false;
 let secondCard = false;
 let movesCount = 0;
 let buttonClicked = false;
-let timeCounter; // Variable para el contador de tiempo
-let elapsedTime = 0; // Tiempo transcurrido en segundos
+let buttonCounter; // Variable para el contador de tiempo
 let firstCardValue;
-
-// Función para actualizar el contador de tiempo
-function updateTime() {
-  elapsedTime++;
-  const minutes = Math.floor(elapsedTime / 60);
-  const seconds = elapsedTime % 60;
-  timeValue.textContent = `Tiempo: ${minutes}:${
-    seconds < 10 ? "0" : ""
-  }${seconds}`;
-}
 
 // Función para mostrar el tablero de juego
 const matrixGenerator = (cardValues, size = 4) => {
@@ -40,7 +26,7 @@ const matrixGenerator = (cardValues, size = 4) => {
           style="grid-column: ${j + 1}; grid-row: ${i + 1};">
           <div class="card-before"></div>
           <div class="card-after">
-            <img src="public/${cardValues[index].image}" class="image"/>
+            <img src="/${cardValues[index].image}" class="image"/>
           </div>
         </div>
       `;
@@ -61,12 +47,12 @@ buttonControl.addEventListener("click", () => {
   if (buttonClicked) {
     movesCount = 0;
     elapsedTime = 0; // Reiniciar el tiempo
-    clearInterval(timeCounter); // Detener el contador de tiempo
+    clearInterval(buttonCounter); // Detener el contador de tiempo
     timeValue.textContent = "Tiempo: 0:00"; // Reiniciar la visualización del tiempo
     moves.textContent = `Movimientos: ${movesCount}`;
   } else {
     // Iniciar contador de tiempo
-    timeCounter = setInterval(updateTime, 1000);
+    buttonCounter = setInterval(updateTime, 1000);
   }
 
   // Cambiar el estado del juego
